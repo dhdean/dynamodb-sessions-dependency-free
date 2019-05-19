@@ -1,7 +1,7 @@
 {
-    "name": "idealstack/dynamodb-sessions-dependency-free",
+    "name": "drbiko/dynamodb-sessions-dependency-free",
     "description": "An implementation of a session handler for storing sessions in AWS's DynamoDB, but with no dependencies on the AWS SDK, Guzzle etc",
-    "homepage": "https://github.com/Idealstack/dynamodb-sessions-dependency-free",
+    "homepage": "https://github.com/drbiko/dynamodb-sessions-dependency-free",
     "keywords": ["aws","amazon","sdk","sessions","dynamodb","cloud"],
     "type": "library",
     "license": "Apache-2.0",
@@ -9,6 +9,10 @@
         {
             "name": "Idealstack",
             "homepage": "https://idealstack.io"
+        },
+        {
+            "name": "Biko Allen",
+            "homepage": "https://www.docresponse.com"
         }
     ],
     "require": {

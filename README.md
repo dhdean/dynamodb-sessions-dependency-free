@@ -71,9 +71,11 @@ use Idealstack\DynamoDbSessionHandlerDependencyFree;
 // or if you don't want to use composer auto-loader, try: 
 // require(__DIR__ .'/vendor/idealstack/dynamodb-session-handler-dependency-free/src/DynamoDbSessionHandler.php');
 
-(new Idealstack\DynamoDbSessionHandlerDependencyFree\DynamoDbSessionHandler(
+(new Idealstack\DynamoDbSessionsDependencyFree\DynamoDbSessionHandler(
 [
             'table_name' => 'your-session-table-name',
+            'region'     => 'local',
+            'endpoint'   => 'http://localhost:8000',
 // Credentials.  In production we recomend you use an instance role so you do not need to hardcode these.
 // At least make sure you don't hardcode them and commit them to github!
             'credentials' => [
@@ -89,7 +91,7 @@ use Idealstack\DynamoDbSessionHandlerDependencyFree;
 //
 //            // The lifetime of an inactive session before it should be garbage collected. If it isn't provided, 
 //            // the actual lifetime value that will be used is ini_get('session.gc_maxlifetime').
-//            'session_lifetime' => 1440, // 24 minutes
+//            'session_lifetime' => 86400, // 24 hours
 //            'consistent_reads' => true, //You almost certainly want this to be true
 //            'session_locking' => false, //True is not supported
         ]

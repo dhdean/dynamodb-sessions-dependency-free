@@ -31,6 +31,7 @@ class AwsClient
     protected $region;
     protected $cache = [];
     protected $version = '20120810';
+    protected $endpoint;
 
     /** @var false|resource Curl handle */
     protected $curl;
@@ -56,6 +57,11 @@ class AwsClient
             throw new AwsClientException('No region specified');
         }
 
+        if (array_key_exists('endpoint', $config)) {
+            $this->endpoint = $config['endpoint'];
+        } else {
+            $this->endpoint = 'http://localhost:8000';
+        }
 
         $this->curl = curl_init();
 
@@ -459,7 +465,11 @@ class AwsClient
 
     protected function awsRequest($action, $params)
     {
-        $endpoint = 'https://' . strtolower($this->service) . '.' . $this->region . '.amazonaws.com/';
+        if ($this->region == 'local') {
+            $endpoint = $this->endpoint;
+        } else {
+            $endpoint = 'https://' . strtolower($this->service) . '.' . $this->region . '.amazonaws.com/';
+        }
 
         $params = $params;
         $headers = [
