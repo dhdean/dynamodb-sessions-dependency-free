@@ -32,6 +32,7 @@ class AwsClient
     protected $cache = [];
     protected $version = '20120810';
     protected $endpoint;
+    protected $role;
 
     /** @var false|resource Curl handle */
     protected $curl;
@@ -61,6 +62,12 @@ class AwsClient
             $this->endpoint = $config['endpoint'];
         } else {
             $this->endpoint = 'http://localhost:8000';
+        }
+
+        if (array_key_exists('role', $config)) {
+            $this->role = $config['role'];
+        } else {
+            $this->role = '';
         }
 
         $this->curl = curl_init();
@@ -321,7 +328,7 @@ class AwsClient
 
     private function getInstanceProfileCredentials()
     {
-        $curl_result = $this->curl(self::EC2_SERVER_URI . self::CRED_PATH);
+        $curl_result = $this->curl(self::EC2_SERVER_URI . self::CRED_PATH . $this->role);
         $response = $curl_result['content'];
         $result = $this->decodeResult($response);
         return [
